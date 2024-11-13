@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Trust Security Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #0073e6;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .result {
+            font-weight: bold;
+            color: #0073e6;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #0073e6;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Zero Trust Security Checker</h1>
+
+    <form id="zeroTrustForm">
+        <div class="section">
+            <h2>Identity Verification</h2>
+            <label><input type="checkbox" name="identity" value="2FA"> Multi-Factor Authentication Enabled</label>
+            <label><input type="checkbox" name="identity" value="SSO"> Single Sign-On (SSO) Configured</label>
+            <label><input type="checkbox" name="identity" value="authLogs"> Regular Authentication Logs Review</label>
+        </div>
+
+        <div class="section">
+            <h2>Network Security</h2>
+            <label><input type="checkbox" name="network" value="vpn"> Secure VPN Required</label>
+            <label><input type="checkbox" name="network" value="segmentation"> Network Segmentation Enforced</label>
+            <label><input type="checkbox" name="network" value="monitoring"> Continuous Monitoring and Alerts</label>
+        </div>
+
+        <div class="section">
+            <h2>Data Protection</h2>
+            <label><input type="checkbox" name="data" value="encryption"> End-to-End Encryption</label>
+            <label><input type="checkbox" name="data" value="backup"> Regular Data Backup</label>
+            <label><input type="checkbox" name="data" value="detection"> Real-Time Threat Detection</label>
+        </div>
+
+        <button type="button" class="button" onclick="checkZeroTrust()">Check Zero Trust Compliance</button>
+    </form>
+
+    <div id="result" class="result"></div>
+
+    <script>
+        function checkZeroTrust() {
+            const totalChecks = document.querySelectorAll("input[type='checkbox']").length;
+            const checkedChecks = document.querySelectorAll("input[type='checkbox']:checked").length;
+            const compliancePercentage = Math.round((checkedChecks / totalChecks) * 100);
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `Zero Trust Compliance: ${compliancePercentage}%`;
+
+            if (compliancePercentage === 100) {
+                resultDiv.innerHTML += "<br>Excellent! You meet all Zero Trust principles.";
+            } else if (compliancePercentage >= 70) {
+                resultDiv.innerHTML += "<br>Good job! However, consider improving in some areas.";
+            } else {
+                resultDiv.innerHTML += "<br>Significant improvements are needed to achieve Zero Trust compliance.";
+            }
+        }
+    </script>
+
+</body>
+</html>
